@@ -1,16 +1,43 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export default function App() {
-  const [searchResults, setSearchResults] = useState()
-  
+  const [searchResults, setSearchResults] = useState([]);
+  const [coordinates, setCoordinates] = useState({});
+
   const handleChange = async (event) => {
-    const response = await axios.get(`${process.env.GEOAPIFY_API_URL}`+`text=${event.target.value}`+``)
+    try {
+      const response = await fetch(`${process.env.REACT_APP_GEO_API_URL}&apiKey=${process.env.REACT_APP_GEO_API_KEY}&format=json&type=city&text=${encodeURI(event.target.value)}`);
+      const data = await response.json();
+      const options = data.results.map((result) => {
+        return (
+          {
+            label: `${result.city}, ${result.state}, ${result.country}`,
+            coordinates: {
+              latitude: result.lat,
+              longitude: result.lon
+            }
+          }
+        );
+      });
+      setSearchResults(options);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  
+
   return (
-    <div>
-      <input type="text" />
+    <div className="app">
+      <div>
+
+      </div>
+      <Autocomplete 
+        options={searchResults}
+        filterOptions={(x) => x /** Disable built-in filtering */}
+        renderInput={(params) => <TextField {...params} onChange={handleChange} />}  
+      />
     </div>
   )
 }
