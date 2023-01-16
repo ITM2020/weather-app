@@ -19,13 +19,13 @@ export default function SearchBar({
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
   }
 
   const handleClick = async () => {
     if (Object.keys(coordinates).length !== 0) {
-      const data = await getCurrentWeather(coordinates.latitude, coordinates.longitude)
-      setCurrentForecast(data)
+      const currentWeather = await getCurrentWeather(coordinates.latitude, coordinates.longitude);
+      setCurrentForecast(currentWeather);
     }
   }
 
