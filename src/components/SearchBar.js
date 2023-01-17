@@ -36,7 +36,7 @@ export default function SearchBar({
         getOptionLabel={(option) => option.label}
         options={searchResults}
         filterOptions={(x) => x /** Disable built-in filtering */}
-        renderInput={(params) => <TextField {...params} onChange={handleChange} />}
+        renderInput={(params) => <TextField {...params} onChange={handleChange} placeholder="Search for a city" />}
         renderOption={(props, option) => (
           <Box component="li" {...props} key={option.key}>{option.label}</Box>
         )}

@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 export default function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -20,19 +21,24 @@ export default function App() {
   const [futureForecast, setFutureForecast] = useState({});
 
   return (
-    <Container className="app">
-      
-      <Typography>Weather App</Typography>
-      <SearchBar
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
-        coordinates={coordinates}
-        setCoordinates={setCoordinates}
-        setCurrentForecast={setCurrentForecast}
-        setFutureForecast={setFutureForecast}
-      />
-      
-      {Object.keys(currentForecast).length === 0
+    <Box
+      component="div"
+      className="App"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch'
+      }}>      
+        <SearchBar
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+          setCurrentForecast={setCurrentForecast}
+          setFutureForecast={setFutureForecast}
+        />
+        {Object.keys(currentForecast).length === 0
         ? <></>
         : <>
           <CurrentWeather currentForecast={currentForecast} />
@@ -42,8 +48,8 @@ export default function App() {
             setFutureForecast={setFutureForecast} />
           </>
       }
-
-      <Box>ITM2020 c Github</Box>    
-    </Container>
+      
+      <Box component="footer" textAlign="center">ITM2020 c Github</Box>    
+    </Box>
   )
 }

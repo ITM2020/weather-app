@@ -33,7 +33,7 @@ const getThreeHrWeather = async (latitude, longitude) => {
 
 const getDailyWeather = async (latitude, longitude) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_OW_DEV}/forecast/daily?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_OW_KEY}`);
+    const response = await fetch(`${process.env.REACT_APP_OW_DEV}/forecast/daily?lat=${latitude}&lon=${longitude}&cnt=14&appid=${process.env.REACT_APP_OW_KEY}`);
     const data = await response.json();
     return data
   } catch (error) {
